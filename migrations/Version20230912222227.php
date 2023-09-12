@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20230908123031 extends AbstractMigration
+final class Version20230912222227 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -24,8 +24,8 @@ final class Version20230908123031 extends AbstractMigration
         $this->addSql('CREATE TABLE articles_images (articles_id INT NOT NULL, images_id INT NOT NULL, INDEX IDX_5A276A471EBAF6CC (articles_id), INDEX IDX_5A276A47D44F05E5 (images_id), PRIMARY KEY(articles_id, images_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE articles_projects (articles_id INT NOT NULL, projects_id INT NOT NULL, INDEX IDX_FD0745BE1EBAF6CC (articles_id), INDEX IDX_FD0745BE1EDE0F55 (projects_id), PRIMARY KEY(articles_id, projects_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE articles_technologies (articles_id INT NOT NULL, technologies_id INT NOT NULL, INDEX IDX_76DA9FE11EBAF6CC (articles_id), INDEX IDX_76DA9FE18F8A14FA (technologies_id), PRIMARY KEY(articles_id, technologies_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE images (id INT AUTO_INCREMENT NOT NULL, title VARCHAR(255) NOT NULL, text_alt VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE professional_experience (id INT AUTO_INCREMENT NOT NULL, start_date DATE DEFAULT NULL, end_date DATE DEFAULT NULL, position VARCHAR(255) DEFAULT NULL, description LONGTEXT DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE images (id INT AUTO_INCREMENT NOT NULL, title VARCHAR(255) NOT NULL, text_alt VARCHAR(255) DEFAULT NULL, image_name VARCHAR(255) DEFAULT NULL, image_size INT DEFAULT NULL, updated_at DATETIME DEFAULT NULL COMMENT \'(DC2Type:datetime_immutable)\', PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE professional_experience (id INT AUTO_INCREMENT NOT NULL, start_date DATE DEFAULT NULL, end_date DATE DEFAULT NULL, position VARCHAR(255) DEFAULT NULL, description LONGTEXT DEFAULT NULL, company VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE projects (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, description LONGTEXT DEFAULT NULL, website_link VARCHAR(255) DEFAULT NULL, repository_link VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE projects_images (projects_id INT NOT NULL, images_id INT NOT NULL, INDEX IDX_21EB22951EDE0F55 (projects_id), INDEX IDX_21EB2295D44F05E5 (images_id), PRIMARY KEY(projects_id, images_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE projects_technologies (projects_id INT NOT NULL, technologies_id INT NOT NULL, INDEX IDX_2590E7421EDE0F55 (projects_id), INDEX IDX_2590E7428F8A14FA (technologies_id), PRIMARY KEY(projects_id, technologies_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
