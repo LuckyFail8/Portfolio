@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes Projets
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h1>Mes projets</h1>
+		{% for project in projects %}
+			<div class="project-container">
+				<div class="project_name">{{ project.name}}</div>
+				<div class="project_description">{{ project.description}}</div>
+				<div class="project_website_link">{{ project.website_link}}</div>
+				<div class="project_repository_link">{{ project.repository_link}}</div>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}
