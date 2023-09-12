@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProfessionalExperienceController!
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h2>Mes experiences professionnelle</h2>
+		{% for professionalExperience in professionalExperiences %}
+			<div class="professionalExperience-container">
+				<div class="professionalExperience_position">
+					Poste :
+					{{ professionalExperience.position}}
+				</div>
+				<div class="professionalExperience_company">
+					chez
+					{{ professionalExperience.company}}
+				</div>
+				<div class="professionalExperience_duration">
+					de
+					{{ professionalExperience.start_date}}
+					à
+					{{ professionalExperience.end_date}}
+				</div>
+				<div class="professionalExperience_description">Description :
+					{{ professionalExperience.description}}
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}
