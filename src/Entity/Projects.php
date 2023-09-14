@@ -28,7 +28,7 @@ class Projects
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $repository_link = null;
 
-    #[ORM\ManyToMany(targetEntity: Images::class, inversedBy: 'projects')]
+    #[ORM\ManyToMany(targetEntity: Images::class, inversedBy: 'projects', cascade: ['persist'], orphanRemoval: false)]
     private Collection $image;
 
     #[ORM\ManyToMany(targetEntity: Articles::class, mappedBy: 'project')]

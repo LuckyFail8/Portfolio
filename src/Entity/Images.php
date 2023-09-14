@@ -166,4 +166,9 @@ class Images
     {
         return $this->imageSize;
     }
+
+    public function __toString(): string
+    {
+        return $this->title;
+    }
 }

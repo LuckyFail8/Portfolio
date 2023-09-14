@@ -34,7 +34,7 @@ class Articles
     #[ORM\ManyToMany(targetEntity: Images::class, inversedBy: 'articles')]
     private Collection $image;
 
-    #[ORM\ManyToMany(targetEntity: Projects::class, inversedBy: 'articles')]
+    #[ORM\ManyToMany(targetEntity: Projects::class, inversedBy: 'articles', cascade: ['persist'], orphanRemoval: false)]
     private Collection $project;
 
     #[ORM\ManyToMany(targetEntity: Technologies::class, inversedBy: 'articles')]
