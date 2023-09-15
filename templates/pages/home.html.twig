@@ -31,24 +31,5 @@
 			<div class="competence-title">PHP</div>
 		</div>
 	</div>
-	<div class="professionnal-exp-container">
-		<h2>Experiences professionnelles</h2>
-		{% for professionalExperience in professionalExperiences %}
-			<div class="professionnal-exp_compagny">
-				{{professionnalExperience.compagny}}
-			</div>
-			<div class="professionnal-exp_position">
-				{{professionnalExperience.position}}
-			</div>
-			<div class="professionnal-exp_duration">
-				{{professionnalExperience.start_date}}
-				à
-				{{professionnalExperience.end_date}}
-			</div>
-			<div class="professionnal-exp_description">
-				{{professionnalExperience.description}}
-			</div>
-		{% endfor %}
-	</div>
 
 {% endblock %}

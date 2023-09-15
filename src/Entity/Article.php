@@ -32,19 +32,19 @@ class Article
     private ?string $author = null;
 
     #[ORM\ManyToMany(targetEntity: Image::class, inversedBy: 'articles')]
-    private Collection $image;
+    private Collection $images;
 
     #[ORM\ManyToMany(targetEntity: Project::class, inversedBy: 'articles', cascade: ['persist'], orphanRemoval: false)]
-    private Collection $project;
+    private Collection $projects;
 
     #[ORM\ManyToMany(targetEntity: Technology::class, inversedBy: 'articles')]
-    private Collection $technology;
+    private Collection $technologies;
 
     public function __construct()
     {
-        $this->image = new ArrayCollection();
-        $this->project = new ArrayCollection();
-        $this->technology = new ArrayCollection();
+        $this->images = new ArrayCollection();
+        $this->projects = new ArrayCollection();
+        $this->technologies = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -117,13 +117,13 @@ class Article
      */
     public function getImage(): Collection
     {
-        return $this->image;
+        return $this->images;
     }
 
     public function addImage(Image $image): static
     {
-        if (!$this->image->contains($image)) {
-            $this->image->add($image);
+        if (!$this->images->contains($image)) {
+            $this->images->add($image);
         }
 
         return $this;
@@ -131,7 +131,7 @@ class Article
 
     public function removeImage(Image $image): static
     {
-        $this->image->removeElement($image);
+        $this->images->removeElement($image);
 
         return $this;
     }
@@ -141,13 +141,13 @@ class Article
      */
     public function getProject(): Collection
     {
-        return $this->project;
+        return $this->projects;
     }
 
     public function addProject(Project $project): static
     {
-        if (!$this->project->contains($project)) {
-            $this->project->add($project);
+        if (!$this->projects->contains($project)) {
+            $this->projects->add($project);
         }
 
         return $this;
@@ -155,7 +155,7 @@ class Article
 
     public function removeProject(Project $project): static
     {
-        $this->project->removeElement($project);
+        $this->projects->removeElement($project);
 
         return $this;
     }
@@ -165,13 +165,13 @@ class Article
      */
     public function getTechnology(): Collection
     {
-        return $this->technology;
+        return $this->technologies;
     }
 
     public function addTechnology(Technology $technology): static
     {
-        if (!$this->technology->contains($technology)) {
-            $this->technology->add($technology);
+        if (!$this->technologies->contains($technology)) {
+            $this->technologies->add($technology);
         }
 
         return $this;
@@ -179,7 +179,7 @@ class Article
 
     public function removeTechnology(Technology $technology): static
     {
-        $this->technology->removeElement($technology);
+        $this->technologies->removeElement($technology);
 
         return $this;
     }

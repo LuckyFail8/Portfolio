@@ -2,12 +2,17 @@
 
 namespace App\Entity;
 
-use App\Repository\TechnologyRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\TechnologyRepository;
+use Doctrine\Common\Collections\Collection;
+use Symfony\Component\HttpFoundation\File\File;
+use Doctrine\Common\Collections\ArrayCollection;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
 
 #[ORM\Entity(repositoryClass: TechnologyRepository::class)]
+#[Vich\Uploadable]
+
 class Technology
 {
     #[ORM\Id]
@@ -24,12 +29,20 @@ class Technology
     #[ORM\ManyToMany(targetEntity: Article::class, mappedBy: 'technologies')]
     private Collection $articles;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?Image $image = null;
+    #[ORM\Column(nullable: true)]
+    private ?int $ranking = null;
+
+    #[Vich\UploadableField(mapping: 'technology_image', fileNameProperty: 'imageName', size: 'imageSize')]
+    private ?File $imageFile = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $raking = null;
+    private ?string $imageName = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $imageSize = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $updatedAt = null;
     public function __construct()
     {
         $this->projects = new ArrayCollection();
@@ -107,27 +120,50 @@ class Technology
         return $this;
     }
 
-    public function getImage(): ?Image
+
+    public function getRanking(): ?int
     {
-        return $this->image;
+        return $this->ranking;
     }
 
-    public function setImage(?Image $image): static
+    public function setRanking(?int $ranking): static
     {
-        $this->image = $image;
+        $this->ranking = $ranking;
 
         return $this;
     }
 
-    public function getRaking(): ?int
+    public function setImageFile(?File $imageFile = null): void
     {
-        return $this->raking;
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
     }
 
-    public function setRaking(?int $raking): static
+    public function getImageFile(): ?File
     {
-        $this->raking = $raking;
+        return $this->imageFile;
+    }
 
-        return $this;
+    public function setImageName(?string $imageName): void
+    {
+        $this->imageName = $imageName;
+    }
+
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
+
+    public function setImageSize(?int $imageSize): void
+    {
+        $this->imageSize = $imageSize;
+    }
+
+    public function getImageSize(): ?int
+    {
+        return $this->imageSize;
     }
 }
