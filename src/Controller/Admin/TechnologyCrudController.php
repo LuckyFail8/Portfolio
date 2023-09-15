@@ -2,14 +2,14 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Technologies;
+use App\Entity\Technology;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
-class TechnologiesCrudController extends AbstractCrudController
+class TechnologyCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Technologies::class;
+        return Technology::class;
     }
 
     /*

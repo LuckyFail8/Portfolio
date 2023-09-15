@@ -2,14 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\ArticlesRepository;
+use App\Repository\ArticleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: ArticlesRepository::class)]
-class Articles
+#[ORM\Entity(repositoryClass: ArticleRepository::class)]
+class Article
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -23,7 +23,7 @@ class Articles
     private ?string $content = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $publication_date = null;
+    private ?\DateTimeInterface $published_at = null;
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $update_at = null;
@@ -31,13 +31,13 @@ class Articles
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $author = null;
 
-    #[ORM\ManyToMany(targetEntity: Images::class, inversedBy: 'articles')]
+    #[ORM\ManyToMany(targetEntity: Image::class, inversedBy: 'articles')]
     private Collection $image;
 
-    #[ORM\ManyToMany(targetEntity: Projects::class, inversedBy: 'articles', cascade: ['persist'], orphanRemoval: false)]
+    #[ORM\ManyToMany(targetEntity: Project::class, inversedBy: 'articles', cascade: ['persist'], orphanRemoval: false)]
     private Collection $project;
 
-    #[ORM\ManyToMany(targetEntity: Technologies::class, inversedBy: 'articles')]
+    #[ORM\ManyToMany(targetEntity: Technology::class, inversedBy: 'articles')]
     private Collection $technology;
 
     public function __construct()
@@ -76,14 +76,14 @@ class Articles
         return $this;
     }
 
-    public function getPublicationDate(): ?\DateTimeInterface
+    public function getPublishedAt(): ?\DateTimeInterface
     {
-        return $this->publication_date;
+        return $this->published_at;
     }
 
-    public function setPublicationDate(\DateTimeInterface $publication_date): static
+    public function setPublishedAt(\DateTimeInterface $published_at): static
     {
-        $this->publication_date = $publication_date;
+        $this->published_at = $published_at;
 
         return $this;
     }
@@ -113,14 +113,14 @@ class Articles
     }
 
     /**
-     * @return Collection<int, Images>
+     * @return Collection<int, Image>
      */
     public function getImage(): Collection
     {
         return $this->image;
     }
 
-    public function addImage(Images $image): static
+    public function addImage(Image $image): static
     {
         if (!$this->image->contains($image)) {
             $this->image->add($image);
@@ -129,7 +129,7 @@ class Articles
         return $this;
     }
 
-    public function removeImage(Images $image): static
+    public function removeImage(Image $image): static
     {
         $this->image->removeElement($image);
 
@@ -137,14 +137,14 @@ class Articles
     }
 
     /**
-     * @return Collection<int, Projects>
+     * @return Collection<int, Project>
      */
     public function getProject(): Collection
     {
         return $this->project;
     }
 
-    public function addProject(Projects $project): static
+    public function addProject(Project $project): static
     {
         if (!$this->project->contains($project)) {
             $this->project->add($project);
@@ -153,7 +153,7 @@ class Articles
         return $this;
     }
 
-    public function removeProject(Projects $project): static
+    public function removeProject(Project $project): static
     {
         $this->project->removeElement($project);
 
@@ -161,14 +161,14 @@ class Articles
     }
 
     /**
-     * @return Collection<int, Technologies>
+     * @return Collection<int, Technology>
      */
     public function getTechnology(): Collection
     {
         return $this->technology;
     }
 
-    public function addTechnology(Technologies $technology): static
+    public function addTechnology(Technology $technology): static
     {
         if (!$this->technology->contains($technology)) {
             $this->technology->add($technology);
@@ -177,7 +177,7 @@ class Articles
         return $this;
     }
 
-    public function removeTechnology(Technologies $technology): static
+    public function removeTechnology(Technology $technology): static
     {
         $this->technology->removeElement($technology);
 

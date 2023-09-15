@@ -3,15 +3,15 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\ImagesRepository;
+use App\Repository\ImageRepository;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\ArrayCollection;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
-#[ORM\Entity(repositoryClass: ImagesRepository::class)]
+#[ORM\Entity(repositoryClass: ImageRepository::class)]
 #[Vich\Uploadable]
-class Images
+class Image
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -24,13 +24,13 @@ class Images
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $text_alt = null;
 
-    #[ORM\ManyToMany(targetEntity: Projects::class, mappedBy: 'image')]
+    #[ORM\ManyToMany(targetEntity: Project::class, mappedBy: 'image')]
     private Collection $projects;
 
-    #[ORM\ManyToMany(targetEntity: Articles::class, mappedBy: 'image')]
+    #[ORM\ManyToMany(targetEntity: Article::class, mappedBy: 'image')]
     private Collection $articles;
 
-    #[Vich\UploadableField(mapping: 'images', fileNameProperty: 'imageName', size: 'imageSize')]
+    #[Vich\UploadableField(mapping: 'image', fileNameProperty: 'imageName', size: 'imageSize')]
     private ?File $imageFile = null;
 
     #[ORM\Column(nullable: true)]
@@ -78,14 +78,14 @@ class Images
     }
 
     /**
-     * @return Collection<int, Projects>
+     * @return Collection<int, Project>
      */
     public function getProjects(): Collection
     {
         return $this->projects;
     }
 
-    public function addProject(Projects $project): static
+    public function addProject(Project $project): static
     {
         if (!$this->projects->contains($project)) {
             $this->projects->add($project);
@@ -95,7 +95,7 @@ class Images
         return $this;
     }
 
-    public function removeProject(Projects $project): static
+    public function removeProject(Project $project): static
     {
         if ($this->projects->removeElement($project)) {
             $project->removeImage($this);
@@ -105,14 +105,14 @@ class Images
     }
 
     /**
-     * @return Collection<int, Articles>
+     * @return Collection<int, Article>
      */
     public function getArticles(): Collection
     {
         return $this->articles;
     }
 
-    public function addArticle(Articles $article): static
+    public function addArticle(Article $article): static
     {
         if (!$this->articles->contains($article)) {
             $this->articles->add($article);
@@ -122,7 +122,7 @@ class Images
         return $this;
     }
 
-    public function removeArticle(Articles $article): static
+    public function removeArticle(Article $article): static
     {
         if ($this->articles->removeElement($article)) {
             $article->removeImage($this);

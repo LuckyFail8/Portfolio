@@ -5,5 +5,50 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Coucou</h1>
+	<div class="intro-container">
+		<div class="intro_text">
+			<h1>Regisseur Lionel</h1>
+			<h2>Je suis développeur web backend PHP / Symfony</h2>
+		</div>
+		<div class="intro_media">
+			<img src="../../public/images/quaiant-site-6503248a9b2de491841050.png" alt="Photo de profil">
+			<button>
+				<link rel="stylesheet" href="#contact">
+				Me contacter
+			</button>
+		</div>
+	</div>
+
+	<div class="Presentation-container">
+		<h2>Présentation</h2>
+		<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illo natus blanditiis sequi exercitationem quibusdam repudiandae ea doloribus itaque! Ratione expedita rerum dolor veritatis amet eius consequuntur itaque, commodi optio unde? Harum rerum ea quibusdam sit inventore tenetur repudiandae placeat pariatur vel voluptate cumque voluptatibus, dolor laborum voluptatem obcaecati et dolore, architecto enim amet dolorum similique quis modi velit quam. Maxime, unde optio quas corporis et beatae qui ut natus sint! Facere ad dignissimos minus corporis doloribus rerum totam at autem eum, perferendis neque facilis praesentium? Libero mollitia illum quis minima enim illo repellendus assumenda esse, sequi minus sint, modi debitis.</p>
+	</div>
+	<div class="competence-container">
+		<div class="competence">
+			<div class="competence-image">
+				<img src="/public/images/quaiant-site-6503248a9b2de491841050.png" alt="">
+			</div>
+			<div class="competence-title">PHP</div>
+		</div>
+	</div>
+	<div class="professionnal-exp-container">
+		<h2>Experiences professionnelles</h2>
+		{% for professionalExperience in professionalExperiences %}
+			<div class="professionnal-exp_compagny">
+				{{professionnalExperience.compagny}}
+			</div>
+			<div class="professionnal-exp_position">
+				{{professionnalExperience.position}}
+			</div>
+			<div class="professionnal-exp_duration">
+				{{professionnalExperience.start_date}}
+				à
+				{{professionnalExperience.end_date}}
+			</div>
+			<div class="professionnal-exp_description">
+				{{professionnalExperience.description}}
+			</div>
+		{% endfor %}
+	</div>
+
 {% endblock %}

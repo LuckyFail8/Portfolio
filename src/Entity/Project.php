@@ -2,14 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\ProjectsRepository;
+use App\Repository\ProjectRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: ProjectsRepository::class)]
-class Projects
+#[ORM\Entity(repositoryClass: ProjectRepository::class)]
+class Project
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -28,20 +28,20 @@ class Projects
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $repository_link = null;
 
-    #[ORM\ManyToMany(targetEntity: Images::class, inversedBy: 'projects', cascade: ['persist'], orphanRemoval: false)]
-    private Collection $image;
+    #[ORM\ManyToMany(targetEntity: Image::class, inversedBy: 'projects', cascade: ['persist'], orphanRemoval: false)]
+    private Collection $images;
 
-    #[ORM\ManyToMany(targetEntity: Articles::class, mappedBy: 'project')]
+    #[ORM\ManyToMany(targetEntity: Article::class, mappedBy: 'projects')]
     private Collection $articles;
 
-    #[ORM\ManyToMany(targetEntity: Technologies::class, inversedBy: 'projects')]
-    private Collection $technology;
+    #[ORM\ManyToMany(targetEntity: Technology::class, inversedBy: 'projects')]
+    private Collection $technologies;
 
     public function __construct()
     {
-        $this->image = new ArrayCollection();
+        $this->images = new ArrayCollection();
         $this->articles = new ArrayCollection();
-        $this->technology = new ArrayCollection();
+        $this->technologies = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -98,38 +98,38 @@ class Projects
     }
 
     /**
-     * @return Collection<int, Images>
+     * @return Collection<int, Image>
      */
     public function getImage(): Collection
     {
-        return $this->image;
+        return $this->images;
     }
 
-    public function addImage(Images $image): static
+    public function addImage(Image $image): static
     {
-        if (!$this->image->contains($image)) {
-            $this->image->add($image);
+        if (!$this->images->contains($image)) {
+            $this->images->add($image);
         }
 
         return $this;
     }
 
-    public function removeImage(Images $image): static
+    public function removeImage(Image $image): static
     {
-        $this->image->removeElement($image);
+        $this->images->removeElement($image);
 
         return $this;
     }
 
     /**
-     * @return Collection<int, Articles>
+     * @return Collection<int, Article>
      */
     public function getArticles(): Collection
     {
         return $this->articles;
     }
 
-    public function addArticle(Articles $article): static
+    public function addArticle(Article $article): static
     {
         if (!$this->articles->contains($article)) {
             $this->articles->add($article);
@@ -139,7 +139,7 @@ class Projects
         return $this;
     }
 
-    public function removeArticle(Articles $article): static
+    public function removeArticle(Article $article): static
     {
         if ($this->articles->removeElement($article)) {
             $article->removeProject($this);
@@ -149,25 +149,25 @@ class Projects
     }
 
     /**
-     * @return Collection<int, Technologies>
+     * @return Collection<int, Technology>
      */
     public function getTechnology(): Collection
     {
-        return $this->technology;
+        return $this->technologies;
     }
 
-    public function addTechnology(Technologies $technology): static
+    public function addTechnology(Technology $technology): static
     {
-        if (!$this->technology->contains($technology)) {
-            $this->technology->add($technology);
+        if (!$this->technologies->contains($technology)) {
+            $this->technologies->add($technology);
         }
 
         return $this;
     }
 
-    public function removeTechnology(Technologies $technology): static
+    public function removeTechnology(Technology $technology): static
     {
-        $this->technology->removeElement($technology);
+        $this->technologies->removeElement($technology);
 
         return $this;
     }

@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\TechnologiesRepository;
+use App\Repository\TechnologyRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: TechnologiesRepository::class)]
-class Technologies
+#[ORM\Entity(repositoryClass: TechnologyRepository::class)]
+class Technology
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -18,11 +18,17 @@ class Technologies
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\ManyToMany(targetEntity: Projects::class, mappedBy: 'technology')]
+    #[ORM\ManyToMany(targetEntity: Project::class, mappedBy: 'technologies')]
     private Collection $projects;
 
-    #[ORM\ManyToMany(targetEntity: Articles::class, mappedBy: 'technology')]
+    #[ORM\ManyToMany(targetEntity: Article::class, mappedBy: 'technologies')]
     private Collection $articles;
+
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?Image $image = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $raking = null;
 
     public function __construct()
     {
@@ -48,14 +54,14 @@ class Technologies
     }
 
     /**
-     * @return Collection<int, Projects>
+     * @return Collection<int, Project>
      */
     public function getProjects(): Collection
     {
         return $this->projects;
     }
 
-    public function addProject(Projects $project): static
+    public function addProject(Project $project): static
     {
         if (!$this->projects->contains($project)) {
             $this->projects->add($project);
@@ -65,7 +71,7 @@ class Technologies
         return $this;
     }
 
-    public function removeProject(Projects $project): static
+    public function removeProject(Project $project): static
     {
         if ($this->projects->removeElement($project)) {
             $project->removeTechnology($this);
@@ -75,14 +81,14 @@ class Technologies
     }
 
     /**
-     * @return Collection<int, Articles>
+     * @return Collection<int, Article>
      */
     public function getArticles(): Collection
     {
         return $this->articles;
     }
 
-    public function addArticle(Articles $article): static
+    public function addArticle(Article $article): static
     {
         if (!$this->articles->contains($article)) {
             $this->articles->add($article);
@@ -92,11 +98,35 @@ class Technologies
         return $this;
     }
 
-    public function removeArticle(Articles $article): static
+    public function removeArticle(Article $article): static
     {
         if ($this->articles->removeElement($article)) {
             $article->removeTechnology($this);
         }
+
+        return $this;
+    }
+
+    public function getImage(): ?Image
+    {
+        return $this->image;
+    }
+
+    public function setImage(?Image $image): static
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function getRaking(): ?int
+    {
+        return $this->raking;
+    }
+
+    public function setRaking(?int $raking): static
+    {
+        $this->raking = $raking;
 
         return $this;
     }

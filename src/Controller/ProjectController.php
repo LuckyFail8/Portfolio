@@ -2,15 +2,15 @@
 
 namespace App\Controller;
 
-use App\Repository\ProjectsRepository;
+use App\Repository\ProjectRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ProjectsController extends AbstractController
+class ProjectController extends AbstractController
 {
     #[Route('/projets', name: 'app_projects')]
-    public function index(ProjectsRepository $repository): Response
+    public function index(ProjectRepository $repository): Response
     {
         $projects = $repository->findAll();
         return $this->render('pages/projects/index.html.twig', [

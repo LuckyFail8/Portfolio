@@ -2,8 +2,8 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Projects;
-use App\Form\ImagesType;
+use App\Entity\Project;
+use App\Form\ImageType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -11,11 +11,11 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 
-class ProjectsCrudController extends AbstractCrudController
+class ProjectCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Projects::class;
+        return Project::class;
     }
 
     public function configureCrud(Crud $crud): Crud
@@ -41,7 +41,7 @@ class ProjectsCrudController extends AbstractCrudController
             TextField::new('repository_link')
                 ->setLabel('Lien du repository'),
             CollectionField::new('image')
-                ->setEntryType(ImagesType::class)
+                ->setEntryType(ImageType::class)
                 ->setLabel('Images'),
         ];
     }

@@ -3,8 +3,8 @@
 namespace App\Controller\Admin;
 
 use App\Entity\ProfessionalExperience;
-use App\Entity\Projects;
-use App\Entity\Technologies;
+use App\Entity\Project;
+use App\Entity\Technology;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -30,8 +30,8 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToCrud('Projets', 'fa-regular fa-folder-open', Projects::class);
+        yield MenuItem::linkToCrud('Projets', 'fa-regular fa-folder-open', Project::class);
         yield MenuItem::linkToCrud('Experiences pro', 'fa-regular fa-handshake', ProfessionalExperience::class);
-        yield MenuItem::linkToCrud('Technologie', 'fa-solid fa-code', Technologies::class);
+        yield MenuItem::linkToCrud('Technologie', 'fa-solid fa-code', Technology::class);
     }
 }
