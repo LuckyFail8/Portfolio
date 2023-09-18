@@ -12,7 +12,7 @@ class ProfessionalExperienceController extends AbstractController
     #[Route('/experience', name: 'app_professional_experience')]
     public function index(ProfessionalExperienceRepository $repository): Response
     {
-        $professionalExperiences = $repository->findAll();
+        $professionalExperiences = $repository->findByEndDateDesc();
 
         return $this->render('/pages/professional_experience/index.html.twig', [
             'controller_name' => 'ProfessionalExperienceController',

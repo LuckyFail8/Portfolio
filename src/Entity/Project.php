@@ -37,6 +37,9 @@ class Project
     #[ORM\ManyToMany(targetEntity: Technology::class, inversedBy: 'projects')]
     private Collection $technologies;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $ranking = null;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
@@ -168,6 +171,18 @@ class Project
     public function removeTechnology(Technology $technology): static
     {
         $this->technologies->removeElement($technology);
+
+        return $this;
+    }
+
+    public function getRanking(): ?int
+    {
+        return $this->ranking;
+    }
+
+    public function setRanking(?int $ranking): static
+    {
+        $this->ranking = $ranking;
 
         return $this;
     }
