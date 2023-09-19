@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Education;
 use App\Entity\ProfessionalExperience;
 use App\Entity\Project;
 use App\Entity\Technology;
@@ -32,6 +33,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Projets', 'fa-regular fa-folder-open', Project::class);
         yield MenuItem::linkToCrud('Experiences pro', 'fa-regular fa-handshake', ProfessionalExperience::class);
+        yield MenuItem::linkToCrud('Education', 'fa-solid fa-graduation-cap', Education::class);
         yield MenuItem::linkToCrud('Technologie', 'fa-solid fa-code', Technology::class);
     }
 }
