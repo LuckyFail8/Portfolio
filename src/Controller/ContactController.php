@@ -5,17 +5,20 @@ namespace App\Controller;
 use App\Entity\Contact;
 use App\Form\ContactType;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ContactController extends AbstractController
 {
     #[Route('/contact', name: 'contact.index')]
     public function index(
         Request $request,
-        EntityManagerInterface $manager
+        EntityManagerInterface $manager,
+        MailerInterface $mailer,
     ): Response {
         $contact = new Contact;
         $contactForm = $this->createForm(ContactType::class, $contact);
@@ -25,6 +28,20 @@ class ContactController extends AbstractController
             $contact = $contactForm->getData();
             $manager->persist($contact);
             $manager->flush();
+
+            //Email
+            $email = (new TemplatedEmail())
+                ->from($contact->getEmail())
+                ->to('Lionel@portfolio.com')
+                ->subject($contact->getSubject())
+                ->htmlTemplate('emails/contact.html.twig')
+
+                // pass variables (name => value) to the template
+                ->context([
+                    'contact' => $contact,
+                ]);
+
+            $mailer->send($email);
 
             $this->addFlash(
                 'success',
