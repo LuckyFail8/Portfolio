@@ -45,4 +45,12 @@ class TechnologyRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function findByRankingAsc(): array
+    {
+        return $this->createQueryBuilder('t')
+            ->orderBy('t.ranking', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 }

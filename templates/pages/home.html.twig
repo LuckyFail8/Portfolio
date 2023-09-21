@@ -24,12 +24,57 @@
 		<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illo natus blanditiis sequi exercitationem quibusdam repudiandae ea doloribus itaque! Ratione expedita rerum dolor veritatis amet eius consequuntur itaque, commodi optio unde? Harum rerum ea quibusdam sit inventore tenetur repudiandae placeat pariatur vel voluptate cumque voluptatibus, dolor laborum voluptatem obcaecati et dolore, architecto enim amet dolorum similique quis modi velit quam. Maxime, unde optio quas corporis et beatae qui ut natus sint! Facere ad dignissimos minus corporis doloribus rerum totam at autem eum, perferendis neque facilis praesentium? Libero mollitia illum quis minima enim illo repellendus assumenda esse, sequi minus sint, modi debitis.</p>
 	</div>
 	<div class="competence-container">
-		<div class="competence">
-			<div class="competence-image">
-				<img src="/public/images/quaiant-site-6503248a9b2de491841050.png" alt="">
+		<h2>Compétences</h2>
+		{% for technology in technologies %}
+			<div class="competence">
+				<div class="competence_title">
+					{{technology.name}}
+				</div>
+				<div class="competence_image">
+					<img src="https://picsum.photos/100" alt="">
+				</div>
 			</div>
-			<div class="competence-title">PHP</div>
-		</div>
+		{% endfor %}
+	</div>
+
+	<div class="project-container">
+		<h2>Projets</h2>
+		{% for project in firstThreeProjects %}
+			<div class="project">
+				<div class="project_name">{{project.name}}</div>
+				<div class="project_description">{{project.description}}</div>
+				<div class="project_website-link">{{project.websiteLink}}</div>
+				<div class="project_repository-link">{{project.repositoryLink}}</div>
+			</div>
+		{% endfor %}
+	</div>
+
+	<div class="professionnal_exp-container">
+		<h2>Experiences professionnels</h2>
+		{% for professionalExperience in professionalExperiences %}
+			<div class="professionnal_exp">
+				<div class="professionnal_exp_position">{{professionalExperience.position}}</div>
+				<div class="professionnal_exp_company">{{professionalExperience.company}}</div>
+				<div class="professionnal_exp_duration">
+					{{professionalExperience.startDate|date('m-Y')}}
+					à
+					{{professionalExperience.endDate|date('m-Y')}}
+				</div>
+				<div class="professionnal_exp_description">{{professionalExperience.description}}</div>
+			</div>
+		{% endfor %}
+
+	</div>
+
+	<div class="education-container">
+		<h2>Formations</h2>
+		{% for education in educations %}
+			<div class="education">
+				<div class="education_title">{{education.title}}</div>
+				<div class="education_year">{{education.year}}</div>
+				<div class="education_description">{{education.description}}</div>
+			</div>
+		{% endfor %}
 	</div>
 
 {% endblock %}

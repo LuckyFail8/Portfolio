@@ -45,4 +45,21 @@ class ProjectRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function findByRankingAsc(): array
+    {
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.ranking', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findFirstThreeProjects(): array
+    {
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.ranking', 'ASC')
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult();
+    }
 }

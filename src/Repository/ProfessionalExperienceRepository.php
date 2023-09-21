@@ -49,7 +49,7 @@ class ProfessionalExperienceRepository extends ServiceEntityRepository
     public function findByEndDateDesc(): array
     {
         return $this->createQueryBuilder('p')
-            ->orderBy('p.endDate', 'DESC')
+            ->orderBy('p.end_date', 'DESC')
             ->getQuery()
             ->getResult();
     }
