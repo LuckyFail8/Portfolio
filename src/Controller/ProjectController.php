@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ProjectController extends AbstractController
 {
-    #[Route('/projets', name: 'app_projects')]
+    #[Route('/projets', name: 'project.index')]
     public function index(ProjectRepository $repository): Response
     {
         $projects = $repository->findAll();
