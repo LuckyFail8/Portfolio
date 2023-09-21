@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Contact;
 use DateInterval;
 use Faker\Factory;
 use App\Entity\Project;
@@ -20,6 +21,8 @@ class AppFixtures extends Fixture
         $existingProject = $manager->getRepository(Project::class)->findAll();
         $existingProfessionalExperience = $manager->getRepository(ProfessionalExperience::class)->findAll();
         $existingEducation = $manager->getRepository(Education::class)->findAll();
+        $existingTechnology = $manager->getRepository(Technology::class)->findAll();
+        $existingContact = $manager->getRepository(Contact::class)->findAll();
 
 
         $randNumber = rand(1, 3);
@@ -70,14 +73,32 @@ class AppFixtures extends Fixture
         }
 
         // Load fixtures for Technology
-        $technologies = ['PHP', 'Symfony', 'MySQL', 'HTML', 'CSS', 'JavaScript', 'Git'];
-        foreach ($technologies as $key => $technologyData) {
-            $technology = new Technology();
-            $technology->setName($technologyData)
-                ->setRanking($key + 1);
+        if (empty($existingTechnology)) {
+            $technologies = ['PHP', 'Symfony', 'MySQL', 'HTML', 'CSS', 'JavaScript', 'Git'];
+            foreach ($technologies as $key => $technologyData) {
+                $technology = new Technology();
+                $technology->setName($technologyData)
+                    ->setRanking($key + 1);
 
-            $manager->persist($technology);
+                $manager->persist($technology);
+            }
         }
+
+
+        // Load fixtures for Contact
+        if (empty($existingContact)) {
+            for ($i = 0; $i < 5; $i++) {
+                $contact = new Contact;
+                $contact->setFullName($faker->name())
+                    ->setCompanyName($faker->company())
+                    ->setEmail($faker->email())
+                    ->setSubject('Demande n°' . ($i + 1))
+                    ->setMessage($faker->text());
+
+                $manager->persist($contact);
+            }
+        }
+
 
         $manager->flush();
     }
