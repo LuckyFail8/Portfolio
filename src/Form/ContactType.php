@@ -20,36 +20,24 @@ class ContactType extends AbstractType
         $builder
             ->add('fullName', TextType::class, [
                 'attr' => [
-                    'class' => 'form-control',
                     'minlenght' => '2',
                     'maxlenght' => '100',
                 ],
                 'label' => 'Nom / Prénom',
-                'label_attr' => [
-                    'class' => 'form-label mt-4'
-                ]
             ])
             ->add('companyName', TextType::class, [
                 'attr' => [
-                    'class' => 'form-control',
                     'minlenght' => '2',
                     'maxlenght' => '180',
                 ],
                 'label' => 'Nom de l\'entreprise',
-                'label_attr' => [
-                    'class' => 'form-label mt-4'
-                ]
             ])
             ->add('email', EmailType::class, [
                 'attr' => [
-                    'class' => 'form-control',
                     'minlenght' => '2',
                     'maxlenght' => '180',
                 ],
                 'label' => 'Adresse email',
-                'label_attr' => [
-                    'class' => 'form-label mt-4'
-                ],
                 'constraints' => [
                     new Assert\NotBlank(),
                     new Assert\Email(),
@@ -58,34 +46,23 @@ class ContactType extends AbstractType
             ])
             ->add('subject', TextType::class, [
                 'attr' => [
-                    'class' => 'form-control',
                     'minlenght' => '2',
                     'maxlenght' => '100',
                 ],
                 'label' => 'Sujet',
-                'label_attr' => [
-                    'class' => 'form-label mt-4'
-                ],
                 'constraints' => [
                     new Assert\Length(['min' => 2, 'max' => 100]),
                 ]
             ])
             ->add('message', TextareaType::class, [
-                'attr' => [
-                    'class' => 'form-control',
-                ],
+                'attr' => [],
                 'label' => 'Message',
-                'label_attr' => [
-                    'class' => 'form-label mt-4'
-                ],
                 'constraints' => [
                     new Assert\NotBlank(),
                 ]
             ])
             ->add('submit', SubmitType::class, [
-                'attr' => [
-                    'class' => 'btn btn-primary mt-4'
-                ],
+                'attr' => [],
                 'label' => 'Soumettre la demande'
             ]);
     }
