@@ -5,52 +5,59 @@
 {% endblock %}
 
 {% block body %}
-	<div class="intro-container">
-		<div class="intro_text">
-			<h1>Regisseur Lionel</h1>
-			<h2>Je suis développeur web backend PHP / Symfony</h2>
+	<div class="intro-container mt-10 flex items-center">
+		<div class="intro_text w-1/2">
+			<h1 class="text-6xl font-bold m-4">Regisseur Lionel</h1>
+			<h2 class="text-2xl m-4">Je suis développeur web backend PHP / Symfony</h2>
 		</div>
-		<div class="intro_media">
-			<img src="../../public/images/quaiant-site-6503248a9b2de491841050.png" alt="Photo de profil">
-			<button>
+		<div class="intro_media  w-1/2 flex-col items-center justify-center text-center">
+			<div class="flex items-center justify-center">
+				<img class="rounded-full" src="https://picsum.photos/500" alt="Photo de profil">
+			</div>
+
+			<button class="mt-4 px-4 py-2 text-white rounded-md bg-amber-700 hover:bg-amber-800">
 				<link rel="stylesheet" href="#contact">
 				Me contacter
 			</button>
 		</div>
 	</div>
 
-	<div class="Presentation-container">
-		<h2>Présentation</h2>
+	<div class="Presentation-container mt-10">
+		<h2 class="text-3xl  mb-4">Présentation</h2>
 		<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illo natus blanditiis sequi exercitationem quibusdam repudiandae ea doloribus itaque! Ratione expedita rerum dolor veritatis amet eius consequuntur itaque, commodi optio unde? Harum rerum ea quibusdam sit inventore tenetur repudiandae placeat pariatur vel voluptate cumque voluptatibus, dolor laborum voluptatem obcaecati et dolore, architecto enim amet dolorum similique quis modi velit quam. Maxime, unde optio quas corporis et beatae qui ut natus sint! Facere ad dignissimos minus corporis doloribus rerum totam at autem eum, perferendis neque facilis praesentium? Libero mollitia illum quis minima enim illo repellendus assumenda esse, sequi minus sint, modi debitis.</p>
 	</div>
-	<div class="competence-container">
-		<h2>Compétences</h2>
-		{% for technology in technologies %}
-			<div class="competence">
-				<div class="competence_title">
-					{{technology.name}}
+	<div class="competence-container mt-10">
+		<h2 class="text-3xl  mb-4" class="text-3xl">Compétences</h2>
+		<div class="competences flex">
+			{% for technology in technologies %}
+				<div class="competence mx-5 flex-col items-center justify-center text-center">
+					<div class="competence_image">
+						<img class="rounded-full" src="https://picsum.photos/100" alt="">
+					</div>
+					<div class="competence_title">
+						{{technology.name}}
+					</div>
 				</div>
-				<div class="competence_image">
-					<img src="https://picsum.photos/100" alt="">
-				</div>
-			</div>
-		{% endfor %}
+			{% endfor %}
+		</div>
 	</div>
 
-	<div class="project-container">
-		<h2>Projets</h2>
-		{% for project in firstThreeProjects %}
-			<div class="project">
-				<div class="project_name">{{project.name}}</div>
-				<div class="project_description">{{project.description}}</div>
-				<div class="project_website-link">{{project.websiteLink}}</div>
-				<div class="project_repository-link">{{project.repositoryLink}}</div>
-			</div>
-		{% endfor %}
+	<div class="project-container mt-10">
+		<h2 class="text-3xl  mb-4">Projets</h2>
+		<div class="projects">
+			{% for project in firstThreeProjects %}
+				<div class="project max-w-2xl mx-auto">
+					<div class="project_name">{{project.name}}</div>
+					<div class="project_description">{{project.description}}</div>
+					<div class="project_website-link">{{project.websiteLink}}</div>
+					<div class="project_repository-link">{{project.repositoryLink}}</div>
+				</div>
+			{% endfor %}
+		</div>
 	</div>
 
-	<div class="professionnal_exp-container">
-		<h2>Experiences professionnels</h2>
+	<div class="professionnal_exp-container mt-10">
+		<h2 class="text-3xl  mb-4">Experiences professionnels</h2>
 		{% for professionalExperience in professionalExperiences %}
 			<div class="professionnal_exp">
 				<div class="professionnal_exp_position">{{professionalExperience.position}}</div>
@@ -66,8 +73,8 @@
 
 	</div>
 
-	<div class="education-container">
-		<h2>Formations</h2>
+	<div class="education-container mt-10">
+		<h2 class="text-3xl  mb-4">Formations</h2>
 		{% for education in educations %}
 			<div class="education">
 				<div class="education_title">{{education.title}}</div>
